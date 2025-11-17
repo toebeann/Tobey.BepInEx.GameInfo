@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <AssemblyName>Tobey.BepInEx.GameInfo</AssemblyName>
+    <Product>Game Info</Product>
+    <Version>1.0.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <RestoreAdditionalProjectSources>
+      https://api.nuget.org/v3/index.json;
+      https://nuget.bepinex.dev/v3/index.json;
+      https://nuget.samboy.dev/v3/index.json
+    </RestoreAdditionalProjectSources>
+    <RootNamespace>Tobey.BepInEx.GameInfo</RootNamespace>
+    <DebugType>none</DebugType>
+    <Configurations>Release</Configurations>
+  </PropertyGroup>
+
+  <Target Name="ZipClean" AfterTargets="AfterClean">
+    <Delete Files="..\bin\$(RootNamespace).Mono.zip;$(OutputPath)\zip\BepInEx\plugins\Tobey\$(TargetFileName)" />
+  </Target>
+
+  <Target Name="ZipBuild" AfterTargets="AfterBuild">
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(OutputPath)\zip\BepInEx\plugins\Tobey\" />
+    <MakeDir Directories="..\bin" Condition="!Exists('..\bin')" />
+    <ZipDirectory SourceDirectory="$(OutputPath)\zip\" DestinationFile="..\bin\$(RootNamespace).Mono.zip" Overwrite="true" />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
+    <PackageReference Include="BepInEx.Core" Version="5.*" PrivateAssets="all" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" PrivateAssets="all" />
+    <PackageReference Include="UnityEngine.Modules" Version="5.6.0" PrivateAssets="all" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
+  </ItemGroup>
+  
+  <Import Project="..\Tobey.BepInEx.GameInfo.Shared\Tobey.BepInEx.GameInfo.Shared.projitems" Label="Shared" />
+</Project>
