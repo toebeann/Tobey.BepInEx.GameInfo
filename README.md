@@ -1,4 +1,4 @@
-# Tobey.BepInEx.GameInfo
+# Tobey's Game Info Logger for BepInEx
 
 A simple BepInEx plugin which logs information about the current Unity game.
 
