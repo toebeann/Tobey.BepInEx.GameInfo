@@ -13,10 +13,6 @@ using Utility;
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
 public class GameInfo : BaseUnityPlugin
 {
-#if IL2CPP
-    internal ManualLogSource Logger => Log;
-#endif
-
     private const string DefaultInfo = "UNKNOWN";
 
     public string GameName { get; private set; } = DefaultInfo;
@@ -31,19 +27,25 @@ public class GameInfo : BaseUnityPlugin
     public void Awake()
 #endif
     {
+#if IL2CPP
+        ManualLogSource logger = Log;
+#else
+        ManualLogSource logger = Logger;
+#endif
+
         try
         {
             ProcessGameInfo();
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex);
+            logger.LogError(ex);
         }
         finally
         {
-            Logger.LogMessage($"Game Name: {GameName}");
-            Logger.LogMessage($"Game Developer: {GameDeveloper}");
-            Logger.LogMessage($"Game Version: {GameVersion}");
+            logger.LogMessage($"Game Name: {GameName}");
+            logger.LogMessage($"Game Developer: {GameDeveloper}");
+            logger.LogMessage($"Game Version: {GameVersion}");
         }
     }
 
