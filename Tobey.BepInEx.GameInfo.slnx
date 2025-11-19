@@ -1,0 +1,8 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Release" />
+  </Configurations>
+  <Project Path="Tobey.BepInEx.GameInfo.IL2CPP/Tobey.BepInEx.GameInfo.IL2CPP.csproj" />
+  <Project Path="Tobey.BepInEx.GameInfo.Shared/Tobey.BepInEx.GameInfo.Shared.shproj" />
+  <Project Path="Tobey.BepInEx.GameInfo/Tobey.BepInEx.GameInfo.csproj" />
+</Solution>
