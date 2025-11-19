@@ -19,8 +19,6 @@ public sealed class GameInfo : BaseUnityPlugin
     public string GameDeveloper { get; private set; } = DefaultInfo;
     public string GameVersion { get; private set; } = DefaultInfo;
 
-    private Traverse GetApplication() => TraverseHelper.SuppressHarmonyWarnings(() => Traverse.CreateWithType("UnityEngine.Application"));
-
 #if IL2CPP
     public override void Load()
 #else
@@ -51,7 +49,7 @@ public sealed class GameInfo : BaseUnityPlugin
 
     private void ProcessGameInfo()
     {
-        var application = GetApplication();
+        var application = TraverseHelper.SuppressHarmonyWarnings(() => Traverse.CreateWithType("UnityEngine.Application"));
         if (!application.TypeExists()) return;
 
         string getValue(string name) => TraverseHelper.SuppressHarmonyWarnings(() => application.Property(name)) switch
