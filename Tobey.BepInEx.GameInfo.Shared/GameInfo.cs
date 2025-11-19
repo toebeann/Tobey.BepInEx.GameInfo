@@ -11,7 +11,7 @@ using System;
 using Utility;
 
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
-public class GameInfo : BaseUnityPlugin
+public sealed class GameInfo : BaseUnityPlugin
 {
     private const string DefaultInfo = "UNKNOWN";
 
