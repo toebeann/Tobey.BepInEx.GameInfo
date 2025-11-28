@@ -14,7 +14,7 @@
     </RestoreAdditionalProjectSources>
     <RootNamespace>Tobey.BepInEx.GameInfo</RootNamespace>
     <DebugType>none</DebugType>
-    <DefineConstants>$(DefineConstants);IL2CPP</DefineConstants>
+    <DefineConstants>IL2CPP</DefineConstants>
     <Configurations>Release</Configurations>
   </PropertyGroup>
 
